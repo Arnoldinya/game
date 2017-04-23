@@ -25,12 +25,12 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['logout', 'game', 'error', 'stat', 'index', 'registry'],
+                        'actions' => ['logout', 'error', 'index', 'registry'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['login', 'index', 'error', 'stat', 'registry'],
+                        'actions' => ['login', 'index', 'error', 'registry'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -101,68 +101,6 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-
-    /**
-     * Игра
-     *
-     * @return string
-     */
-    public function actionGame()
-    {
-        $user = User::findOne(Yii::$app->user->id);
-
-        $postiton = rand(1, 3);
-
-        $logForm = new LogForm([
-            'correct_position' => $postiton,
-            'user_id'          => $user->id,
-        ]);
-
-        if ($logForm->load(Yii::$app->request->post()))
-        {
-            $logForm->save();
-            $user = User::findOne(Yii::$app->user->id);
-        }
-
-        return $this->render('game', [
-            'logForm'  => $logForm,
-            'user'     => $user,
-            'postiton' => $postiton,
-        ]);
-    }
-
-    /**
-     * Статистика
-     *
-     * @return string
-     */
-    public function actionStat()
-    {
-        $query = Log::find()
-            ->select([
-                'user_id',
-                'sum(gain) as s_gain',
-                'sum(type) as s_type',
-            ])
-            ->groupBy('user_id');
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'sort'  => [
-                'attributes' => [
-                    's_type',
-                    's_gain',
-                ],
-                'defaultOrder' => [
-                    's_type'  => SORT_DESC,
-                ]
-            ],
-        ]);
-
-        return $this->render('stat', [
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
     /**

@@ -37,8 +37,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Игра', 'url' => ['/site/game']],
-            ['label' => 'Статистика', 'url' => ['/site/stat']],
+            ['label' => 'Игра', 'url' => ['/game/index']],
+            ['label' => 'Статистика', 'url' => ['/game/stat']],
             ['label' => 'Регистация', 'url' => ['/site/registry']],
             !Yii::$app->user->isGuest ? (
                 ['label' => 'Личный кабинет', 'url' => ['/user/index']]
