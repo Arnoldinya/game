@@ -28,13 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	        		return $model->user->name;
 	        	},
 	        ],	        
-	        's_type',
-	        [
-	        	'attribute' => 's_gain',
-	        	'value'     => function ($model) {
-	        		return round($model->s_gain, 1);
-	        	}
-	        ]
+	        'cnt',
+	        'value',
 	    ],
 	]); ?>
 </div>

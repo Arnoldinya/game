@@ -200,4 +200,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Pay::className(), ['user_id' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStats()
+    {
+        return $this->hasMany(Stat::className(), ['user_id' => 'id']);
+    }
 }

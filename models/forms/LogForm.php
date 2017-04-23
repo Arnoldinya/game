@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use app\models\User;
 use app\models\Log;
+use app\models\Stat;
 
 /**
  * LogForm
@@ -105,6 +106,17 @@ class LogForm extends Model
                 $user = User::findOne($this->user_id);
                 $user->balance = $user->balance + $this->gain;
                 $user->save();
+
+                $stat = Stat::findOne($this->user_id);
+                if(!$stat)
+                {
+                    $stat = new Stat([
+                        'user_id' => $this->user_id,
+                    ]);
+                }
+
+                $stat->cnt++;
+                $stat->save();
 
                 return true;
             }            

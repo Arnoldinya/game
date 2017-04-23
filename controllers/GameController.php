@@ -7,11 +7,9 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
-use app\models\forms\LoginForm;
 use app\models\forms\LogForm;
-use app\models\forms\UserForm;
 use app\models\User;
-use app\models\Log;
+use app\models\Stat;
 
 class GameController extends Controller
 {
@@ -80,23 +78,15 @@ class GameController extends Controller
      */
     public function actionStat()
     {
-        $query = Log::find()
-            ->select([
-                'user_id',
-                'sum(gain) as s_gain',
-                'sum(type) as s_type',
-            ])
-            ->groupBy('user_id');
-
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => Stat::find()->current(),
             'sort'  => [
                 'attributes' => [
-                    's_type',
-                    's_gain',
+                    'cnt',
+                    'value',
                 ],
                 'defaultOrder' => [
-                    's_type'  => SORT_DESC,
+                    'cnt'  => SORT_DESC,
                 ]
             ],
         ]);

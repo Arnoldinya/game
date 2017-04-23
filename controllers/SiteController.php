@@ -8,7 +8,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use app\models\forms\LoginForm;
-use app\models\forms\LogForm;
 use app\models\forms\UserForm;
 use app\models\User;
 use app\models\Log;

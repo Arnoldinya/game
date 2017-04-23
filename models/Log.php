@@ -26,9 +26,6 @@ class Log extends ActiveRecord
     const TYPE_LOSE = 0;
     const TYPE_WIN = 1;
 
-    public $s_gain;
-    public $s_type;
-
     /**
      * @return array
      */
@@ -92,8 +89,6 @@ class Log extends ActiveRecord
             'type'             => 'Тип',
             'created_at'       => 'Дата игры',
             'updated_at'       => 'Дата обновления',
-            's_gain'           => 'Сумма выигрыша минус проигрыш',
-            's_type'           => 'Кол-во побед',
         ];
     }
 
